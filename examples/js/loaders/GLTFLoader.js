@@ -206,7 +206,8 @@ THREE.GLTFLoader = ( function () {
 		KHR_BINARY_GLTF: 'KHR_binary_glTF',
 		KHR_LIGHTS: 'KHR_lights',
 		KHR_MATERIALS_COMMON: 'KHR_materials_common',
-		KHR_MATERIALS_PBR_SPECULAR_GLOSSINESS: 'KHR_materials_pbrSpecularGlossiness'
+		KHR_MATERIALS_PBR_SPECULAR_GLOSSINESS: 'KHR_materials_pbrSpecularGlossiness',
+		KHR_MATERIALS_CMN_CONSTANT: 'KHR_materials_cmnConstant'
 	};
 
 	/**
@@ -1648,6 +1649,10 @@ THREE.GLTFLoader = ( function () {
 				var khcExtension = extensions[ EXTENSIONS.KHR_MATERIALS_COMMON ];
 				materialType = khcExtension.getMaterialType( material );
 				pending.push( khcExtension.extendParams( materialParams, material, parser ) );
+
+			} else if ( materialExtensions[ EXTENSIONS.KHR_MATERIALS_CMN_CONSTANT ] ) {
+
+				materialType = THREE.MeshBasicMaterial;
 
 			} else if ( materialExtensions[ EXTENSIONS.KHR_MATERIALS_PBR_SPECULAR_GLOSSINESS ] ) {
 
